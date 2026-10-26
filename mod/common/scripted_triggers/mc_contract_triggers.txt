@@ -1,0 +1,38 @@
+# Country scope. Fail closed until delivery/release and live pricing are proven.
+mc_backend_ready = { always = no }
+mc_backend_can_release = { always = no }
+mc_contract_idle = {
+    OR = {
+        NOT = { has_variable = mc_state }
+        var:mc_state = 0
+    }
+    OR = {
+        NOT = { has_variable = mc_cooldown }
+        var:mc_cooldown = 0
+    }
+    OR = {
+        NOT = { has_variable = mc_debt }
+        var:mc_debt = 0
+    }
+}
+mc_can_sign = {
+    mc_contract_idle = yes
+    OR = {
+        has_variable = mc_sandbox
+        AND = { mc_backend_ready = yes gold_reserves >= mc_entry_fee }
+    }
+}
+mc_can_renew = {
+    var:mc_state = 2
+    var:mc_remaining <= 4
+    var:mc_remaining > 0
+    var:mc_debt = 0
+}
+mc_can_cancel = {
+    OR = { var:mc_state = 1 var:mc_state = 2 }
+    var:mc_debt = 0
+    OR = {
+        AND = { has_variable = mc_sandbox var:mc_sandbox_balance >= mc_cancel_fee }
+        AND = { NOT = { has_variable = mc_sandbox } gold_reserves >= mc_cancel_fee }
+    }
+}

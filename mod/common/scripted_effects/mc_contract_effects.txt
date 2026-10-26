@@ -1,0 +1,153 @@
+# Country scope throughout. State: 0 idle, 1 muster, 2 active, 3 withdrawing.
+mc_initialize = {
+    if = {
+        limit = { NOT = { has_variable = mc_state } }
+        set_variable = { name = mc_state value = 0 }
+        set_variable = { name = mc_debt value = 0 }
+        set_variable = { name = mc_cooldown value = 0 }
+        set_variable = { name = mc_credit_strikes value = 0 }
+        set_variable = { name = mc_sandbox_balance value = 0 }
+        set_variable = { name = mc_weekly_fee value = 0 }
+        set_variable = { name = mc_muster value = 0 }
+        set_variable = { name = mc_remaining value = 0 }
+        set_variable = { name = mc_arrears value = 0 }
+    }
+}
+mc_sign_contract = {
+    if = {
+        limit = { mc_can_sign = yes }
+        if = {
+            limit = { has_variable = mc_sandbox }
+            if = {
+                limit = { var:mc_sandbox_balance >= mc_entry_fee }
+                change_variable = { name = mc_sandbox_balance add = mc_negative_entry_fee }
+                mc_activate_contract = yes
+            }
+        }
+        else = {
+            # Unreachable with the shipped backend gate. No military promises here.
+            add_treasury = mc_negative_entry_fee
+            mc_activate_contract = yes
+        }
+    }
+}
+mc_activate_contract = {
+    set_variable = { name = mc_weekly_fee value = mc_weekly_quote }
+    set_variable = { name = mc_state value = 1 }
+    set_variable = { name = mc_muster value = 4 }
+    set_variable = { name = mc_remaining value = 52 }
+    set_variable = { name = mc_arrears value = 0 }
+    set_variable = { name = mc_debt value = 0 }
+}
+mc_pay_invoice = {
+    if = {
+        limit = { has_variable = mc_sandbox }
+        change_variable = { name = mc_sandbox_balance add = mc_negative_due }
+    }
+    else = { add_treasury = mc_negative_due }
+    set_variable = { name = mc_debt value = 0 }
+    set_variable = { name = mc_arrears value = 0 }
+}
+mc_miss_invoice = {
+    change_variable = { name = mc_debt add = var:mc_weekly_fee }
+    change_variable = { name = mc_arrears add = 1 }
+    if = {
+        limit = { var:mc_arrears >= 6 }
+        change_variable = { name = mc_credit_strikes add = 1 }
+        set_variable = { name = mc_state value = 3 }
+    }
+}
+mc_bill_week = {
+    if = {
+        limit = { has_variable = mc_sandbox }
+        if = {
+            limit = { var:mc_sandbox_balance >= mc_total_due }
+            mc_pay_invoice = yes
+        }
+        else = { mc_miss_invoice = yes }
+    }
+    else = {
+        if = {
+            limit = { gold_reserves >= mc_total_due }
+            mc_pay_invoice = yes
+        }
+        else = { mc_miss_invoice = yes }
+    }
+}
+mc_weekly_tick = {
+    mc_initialize = yes
+    if = {
+        limit = { var:mc_state = 1 }
+        change_variable = { name = mc_muster subtract = 1 }
+        if = {
+            limit = { var:mc_muster <= 0 }
+            set_variable = { name = mc_state value = 2 }
+        }
+    }
+    else_if = {
+        limit = { var:mc_state = 2 }
+        mc_bill_week = yes
+        change_variable = { name = mc_remaining subtract = 1 }
+        if = {
+            limit = { var:mc_remaining <= 0 }
+            set_variable = { name = mc_state value = 3 }
+        }
+    }
+    else_if = {
+        limit = { var:mc_state = 3 }
+        if = {
+            limit = { OR = { has_variable = mc_sandbox mc_backend_can_release = yes } }
+            mc_close_contract = yes
+        }
+    }
+    else_if = {
+        limit = { var:mc_cooldown > 0 }
+        change_variable = { name = mc_cooldown subtract = 1 }
+    }
+}
+mc_close_contract = {
+    # Sandbox only until a real backend can release safely. Keep debt/credit.
+    set_variable = { name = mc_state value = 0 }
+    set_variable = { name = mc_cooldown value = 8 }
+    remove_variable = mc_sandbox
+    set_variable = { name = mc_muster value = 0 }
+    set_variable = { name = mc_remaining value = 0 }
+    set_variable = { name = mc_arrears value = 0 }
+}
+mc_cancel_contract = {
+    if = {
+        limit = { mc_can_cancel = yes }
+        if = {
+            limit = { has_variable = mc_sandbox }
+            change_variable = { name = mc_sandbox_balance add = mc_negative_cancel_fee }
+        }
+        else = { add_treasury = mc_negative_cancel_fee }
+        set_variable = { name = mc_state value = 3 }
+    }
+}
+mc_renew_contract = {
+    if = {
+        limit = { mc_can_renew = yes }
+        change_variable = { name = mc_remaining add = 52 }
+    }
+}
+mc_settle_debt = {
+    if = {
+        limit = { var:mc_debt > 0 }
+        if = {
+            limit = { has_variable = mc_demo_account }
+            if = {
+                limit = { var:mc_sandbox_balance >= var:mc_debt }
+                change_variable = { name = mc_sandbox_balance add = mc_negative_debt }
+                set_variable = { name = mc_debt value = 0 }
+                set_variable = { name = mc_arrears value = 0 }
+            }
+        }
+        else_if = {
+            limit = { gold_reserves >= var:mc_debt }
+            add_treasury = mc_negative_debt
+            set_variable = { name = mc_debt value = 0 }
+            set_variable = { name = mc_arrears value = 0 }
+        }
+    }
+}

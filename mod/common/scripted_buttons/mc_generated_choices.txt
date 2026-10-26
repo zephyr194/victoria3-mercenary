@@ -1,0 +1,89 @@
+mc_demo_1_5 = {
+    name = mc_demo_1_5
+    desc = mc_demo_1_5_desc
+    visible = { always = yes }
+    possible = {
+        mc_contract_idle = yes
+        OR = {
+            NOT = { has_variable = mc_demo_account }
+            var:mc_sandbox_balance >= 10000
+        }
+    }
+    ai_chance = { base = 0 }
+    effect = { mc_demo_1_5_start = yes }
+}
+
+mc_demo_1_10 = {
+    name = mc_demo_1_10
+    desc = mc_demo_1_10_desc
+    visible = { always = yes }
+    possible = {
+        mc_contract_idle = yes
+        OR = {
+            NOT = { has_variable = mc_demo_account }
+            var:mc_sandbox_balance >= 20000
+        }
+    }
+    ai_chance = { base = 0 }
+    effect = { mc_demo_1_10_start = yes }
+}
+
+mc_demo_2_5 = {
+    name = mc_demo_2_5
+    desc = mc_demo_2_5_desc
+    visible = { always = yes }
+    possible = {
+        mc_contract_idle = yes
+        OR = {
+            NOT = { has_variable = mc_demo_account }
+            var:mc_sandbox_balance >= 12000
+        }
+    }
+    ai_chance = { base = 0 }
+    effect = { mc_demo_2_5_start = yes }
+}
+
+mc_demo_2_10 = {
+    name = mc_demo_2_10
+    desc = mc_demo_2_10_desc
+    visible = { always = yes }
+    possible = {
+        mc_contract_idle = yes
+        OR = {
+            NOT = { has_variable = mc_demo_account }
+            var:mc_sandbox_balance >= 24000
+        }
+    }
+    ai_chance = { base = 0 }
+    effect = { mc_demo_2_10_start = yes }
+}
+
+mc_demo_3_5 = {
+    name = mc_demo_3_5
+    desc = mc_demo_3_5_desc
+    visible = { always = yes }
+    possible = {
+        mc_contract_idle = yes
+        OR = {
+            NOT = { has_variable = mc_demo_account }
+            var:mc_sandbox_balance >= 14400
+        }
+    }
+    ai_chance = { base = 0 }
+    effect = { mc_demo_3_5_start = yes }
+}
+
+mc_demo_3_10 = {
+    name = mc_demo_3_10
+    desc = mc_demo_3_10_desc
+    visible = { always = yes }
+    possible = {
+        mc_contract_idle = yes
+        OR = {
+            NOT = { has_variable = mc_demo_account }
+            var:mc_sandbox_balance >= 28800
+        }
+    }
+    ai_chance = { base = 0 }
+    effect = { mc_demo_3_10_start = yes }
+}

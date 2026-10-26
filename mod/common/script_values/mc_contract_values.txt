@@ -1,0 +1,15 @@
+# Development quote: fixed reference, NOT a live vanilla cost calculation.
+mc_weekly_quote = {
+    value = 400
+    multiply = var:mc_size
+    if = { limit = { var:mc_level = 1 } multiply = 1.25 }
+    else_if = { limit = { var:mc_level = 2 } multiply = 1.50 }
+    else = { multiply = 1.80 }
+}
+mc_negative_entry_fee = { value = mc_weekly_quote multiply = -4 }
+mc_entry_fee = { value = mc_weekly_quote multiply = 4 }
+mc_cancel_fee = { value = var:mc_weekly_fee multiply = 4 }
+mc_total_due = { value = var:mc_weekly_fee add = var:mc_debt }
+mc_negative_due = { value = mc_total_due multiply = -1 }
+mc_negative_debt = { value = var:mc_debt multiply = -1 }
+mc_negative_cancel_fee = { value = mc_cancel_fee multiply = -1 }

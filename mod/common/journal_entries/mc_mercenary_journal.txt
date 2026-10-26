@@ -1,0 +1,35 @@
+# No periodic global scan or delayed event chain. One weekly hook per JE.
+mc_je = {
+    is_shown_when_inactive = { is_player = yes }
+    possible = { is_player = yes }
+    immediate = { mc_initialize = yes }
+    on_weekly_pulse = { effect = { mc_weekly_tick = yes } }
+    transferable = no
+    can_revolution_inherit = no
+    weight = 10
+    scripted_button = mc_demo_1_5
+    scripted_button = mc_demo_1_10
+    scripted_button = mc_demo_2_5
+    scripted_button = mc_demo_2_10
+    scripted_button = mc_demo_3_5
+    scripted_button = mc_demo_3_10
+    scripted_button = mc_live_hire
+    scripted_button = mc_cancel
+    scripted_button = mc_renew
+    scripted_button = mc_topup
+    scripted_button = mc_drain
+    scripted_button = mc_settle
+    status_desc = {
+        first_valid = {
+            triggered_desc = { desc = mc_status_withdrawing trigger = { var:mc_state = 3 } }
+            triggered_desc = { desc = mc_status_late4 trigger = { var:mc_state = 2 var:mc_arrears >= 4 } }
+            triggered_desc = { desc = mc_status_late2 trigger = { var:mc_state = 2 var:mc_arrears >= 2 } }
+            triggered_desc = { desc = mc_status_late1 trigger = { var:mc_state = 2 var:mc_arrears >= 1 } }
+            triggered_desc = { desc = mc_status_muster trigger = { var:mc_state = 1 } }
+            triggered_desc = { desc = mc_status_active trigger = { var:mc_state = 2 } }
+            triggered_desc = { desc = mc_status_cooldown trigger = { var:mc_cooldown > 0 } }
+            triggered_desc = { desc = mc_status_debt trigger = { var:mc_debt > 0 } }
+            triggered_desc = { desc = mc_status_idle trigger = { always = yes } }
+        }
+    }
+}

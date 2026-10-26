@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-26",
+  "game_executed": false,
+  "snapshots": {
+    "1.13.11": {
+      "urls": {
+        "effects": "https://github.com/Victoria-3-Modding-Co-op/Modding-Digests/blob/main/1.13.11/docs/effects.log",
+        "triggers": "https://github.com/Victoria-3-Modding-Co-op/Modding-Digests/blob/main/1.13.11/docs/triggers.log"
+      },
+      "bindings": {
+        "effects": {
+          "set_variable": "## set_variable\nSets a variable  \nset_variable = { name = X value = Y days = Z }  \nWhere X is the name of the variable used to then access it  \nWhere Y is any event target, bool, value, script value or flag (flag:W)  \nAn optional days where Z is the number of days or script value  \nThis variable will be accessible with <type_>var:X. With type being in a scope object or in a top scope  \nCan also be used as set_variable = X (equivalent to set_variable = { name = X value = yes })\n**Supported Scopes**: none",
+          "change_variable": "## change_variable\nChanges the value or a numeric variable  \nchange_variable = { name = X operation = Y }  \nWhere X is the name of the numeric variable to modify  \nWhere the valid operations are add, subtract, multiply, divide, modulo, min and max  \nWhere Y is a fixed point value, script value or event target of a value type\n**Supported Scopes**: none",
+          "remove_variable": "## remove_variable\nRemoves a variable  \nremove_variable = variable_name\n**Supported Scopes**: none",
+          "add_treasury": "## add_treasury\nAdd/remove money from a country  \nadd_treasury = fixed point\n**Supported Scopes**: country",
+          "create_military_formation": "## create_military_formation\nCreates a military formation  \ncreate_military_formation = {  \n\t# Optional name  \n\tname = \"name\"  \n\t# type defaults to army  \n\ttype = army/fleet  \n\thq_region = sr:region_russia  \n\t# Optional, overrides the automatic supply hub selection  \n\tsupply_hub = s:STATE_MOSCOW  \n\t# Add as many combat_unit specifications as necessary  \n\tcombat_unit = {  \n\t\ttype = unit_type:combat_unit_type_irregular_infantry  \n\t\t# service_type defaults to regular and conscript is not applicable for fleets  \n\t\tservice_type = regular/conscript  \n\t\tstate_region = s:STATE_MOSCOW  \n\t\tcount = 5  \n\t}  \n\t# mobilization_options are not applicable for fleets  \n\tmobilization_options = {  \n\t\tmobilization_option:mobilization_option_basic_supplies  \n\t\tmobilization_option:mobilization_option_truck_transport  \n\t}  \n}\n**Supported Scopes**: country",
+          "remove_building": "## remove_building\nRemove a building in the scope state  \nremove_building = building_key\n**Supported Scopes**: state",
+          "transfer_to_formation": "## transfer_to_formation\nTransfers scope character to target formation  \ntransfer_to_formation = scope:formation\n**Supported Scopes**: character  \n**Supported Targets**: military_formation",
+          "destroy_container": "## destroy_container\nDestroys the script container in scope.  \ndestroy_container = yes\n**Supported Scopes**: container"
+        },
+        "triggers": {
+          "has_variable": "## has_variable\nChecks whether the current scope has the specified variable set  \nhas_variable = name\n**Supported Scopes**: none",
+          "gold_reserves": "## gold_reserves\nDoes the country have the required gold reserves  \ngold_reserves > 500\nTraits: <, <=, =, !=, >, >=\nReads gamestate for all scopes.\n**Supported Scopes**: country",
+          "is_player": "## is_player\nTrue if country scope is a player  \nis_player = bool\nTraits: yes/no \nReads gamestate for all scopes.\n**Supported Scopes**: country",
+          "has_deployed_units": "## has_deployed_units\nCheck if a building supports any units which have been deployed outside of home HQ  \nhas_deployed_units = yes/no\nTraits: yes/no \nReads gamestate for all scopes.\n**Supported Scopes**: building"
+        }
+      }
+    },
+    "1.14.5-openbeta": {
+      "urls": {
+        "effects": "https://github.com/Victoria-3-Modding-Co-op/Modding-Digests/blob/main/1.14.5-openbeta/docs/effects.log",
+        "triggers": "https://github.com/Victoria-3-Modding-Co-op/Modding-Digests/blob/main/1.14.5-openbeta/docs/triggers.log"
+      },
+      "bindings": {
+        "effects": {
+          "set_variable": "## set_variable\nSets a variable  \nset_variable = { name = X value = Y days = Z }  \nWhere X is the name of the variable used to then access it  \nWhere Y is any event target, bool, value, script value or flag (flag:W)  \nAn optional days where Z is the number of days or script value  \nThis variable will be accessible with <type_>var:X. With type being in a scope object or in a top scope  \nCan also be used as set_variable = X (equivalent to set_variable = { name = X value = yes })\n**Supported Scopes**: none",
+          "change_variable": "## change_variable\nChanges the value or a numeric variable  \nchange_variable = { name = X operation = Y }  \nWhere X is the name of the numeric variable to modify  \nWhere the valid operations are add, subtract, multiply, divide, modulo, min and max  \nWhere Y is a fixed point value, script value or event target of a value type\n**Supported Scopes**: none",
+          "remove_variable": "## remove_variable\nRemoves a variable  \nremove_variable = variable_name\n**Supported Scopes**: none",
+          "add_treasury": "## add_treasury\nAdd/remove money from a country  \nadd_treasury = fixed point\n**Supported Scopes**: country",
+          "create_military_formation": "## create_military_formation\nCreates a military formation  \ncreate_military_formation = {  \n\t# Optional name  \n\tname = \"name\"  \n\t# type defaults to army  \n\ttype = army/fleet  \n\thq_region = sr:region_russia  \n\t# Optional, overrides the automatic supply hub selection  \n\tsupply_hub = s:STATE_MOSCOW  \n\t# Add as many combat_unit specifications as necessary  \n\tcombat_unit = {  \n\t\ttype = unit_type:combat_unit_type_irregular_infantry  \n\t\t# service_type defaults to regular and conscript is not applicable for fleets  \n\t\tservice_type = regular/conscript  \n\t\tstate_region = s:STATE_MOSCOW  \n\t\tcount = 5  \n\t}  \n\t# mobilization_options are not applicable for fleets  \n\tmobilization_options = {  \n\t\tmobilization_option:mobilization_option_basic_supplies  \n\t\tmobilization_option:mobilization_option_truck_transport  \n\t}  \n}\n**Supported Scopes**: country",
+          "remove_building": "## remove_building\nRemove a building in the scope state  \nremove_building = building_key\n**Supported Scopes**: state",
+          "transfer_to_formation": "## transfer_to_formation\nTransfers scope character to target formation  \ntransfer_to_formation = scope:formation\n**Supported Scopes**: character  \n**Supported Targets**: military_formation",
+          "destroy_container": "## destroy_container\nDestroys the script container in scope.  \ndestroy_container = yes\n**Supported Scopes**: container"
+        },
+        "triggers": {
+          "has_variable": "## has_variable\nChecks whether the current scope has the specified variable set  \nhas_variable = name\n**Supported Scopes**: none",
+          "gold_reserves": "## gold_reserves\nDoes the country have the required gold reserves  \ngold_reserves > 500\nTraits: <, <=, =, !=, >, >=\nReads gamestate for all scopes.\n**Supported Scopes**: country",
+          "is_player": "## is_player\nTrue if country scope is a player  \nis_player = bool\nTraits: yes/no \nReads gamestate for all scopes.\n**Supported Scopes**: country",
+          "has_deployed_units": "## has_deployed_units\nCheck if a building supports any units which have been deployed outside of home HQ  \nhas_deployed_units = yes/no\nTraits: yes/no \nReads gamestate for all scopes.\n**Supported Scopes**: building"
+        }
+      }
+    }
+  }
+}

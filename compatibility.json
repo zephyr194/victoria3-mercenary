@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0-dev",
+  "military_backend": "blocked_unverified",
+  "targets": {
+    "1.13": {"evidence_snapshot": "1.13.11", "game_verified": false},
+    "1.14": {"evidence_snapshot": "1.14.5-openbeta", "game_verified": false, "stable_verified": false}
+  }
+}

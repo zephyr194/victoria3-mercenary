@@ -1,0 +1,58 @@
+mc_live_hire = {
+    name = mc_live_hire
+    desc = mc_live_hire_desc
+    visible = { always = yes }
+    possible = { mc_backend_ready = yes }
+    ai_chance = { base = 0 }
+    effect = { }
+}
+mc_cancel = {
+    name = mc_cancel
+    desc = mc_cancel_desc
+    visible = { has_variable = mc_sandbox }
+    possible = { mc_can_cancel = yes }
+    ai_chance = { base = 0 }
+    effect = { mc_cancel_contract = yes }
+}
+mc_renew = {
+    name = mc_renew
+    desc = mc_renew_desc
+    visible = { has_variable = mc_sandbox }
+    possible = { mc_can_renew = yes }
+    ai_chance = { base = 0 }
+    effect = { mc_renew_contract = yes }
+}
+mc_topup = {
+    name = mc_topup
+    desc = mc_topup_desc
+    visible = { has_variable = mc_demo_account }
+    possible = { has_variable = mc_demo_account }
+    ai_chance = { base = 0 }
+    effect = {
+        if = {
+            limit = { has_variable = mc_demo_account }
+            change_variable = { name = mc_sandbox_balance add = 100000 }
+        }
+    }
+}
+mc_drain = {
+    name = mc_drain
+    desc = mc_drain_desc
+    visible = { has_variable = mc_sandbox }
+    possible = { has_variable = mc_sandbox }
+    ai_chance = { base = 0 }
+    effect = {
+        if = {
+            limit = { has_variable = mc_sandbox }
+            set_variable = { name = mc_sandbox_balance value = 0 }
+        }
+    }
+}
+mc_settle = {
+    name = mc_settle
+    desc = mc_settle_desc
+    visible = { has_variable = mc_demo_account }
+    possible = { var:mc_debt > 0 var:mc_sandbox_balance >= var:mc_debt }
+    ai_chance = { base = 0 }
+    effect = { mc_settle_debt = yes }
+}

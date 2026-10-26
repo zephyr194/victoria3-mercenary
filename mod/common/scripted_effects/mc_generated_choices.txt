@@ -1,0 +1,119 @@
+mc_demo_1_5_start = {
+    mc_initialize = yes
+    if = {
+        limit = { mc_contract_idle = yes }
+        if = {
+            limit = { NOT = { has_variable = mc_demo_account } }
+            set_variable = { name = mc_demo_account value = yes }
+            set_variable = { name = mc_sandbox_balance value = 1000000 }
+        }
+        set_variable = { name = mc_level value = 1 }
+        set_variable = { name = mc_size value = 5 }
+        set_variable = { name = mc_sandbox value = yes }
+        mc_sign_contract = yes
+        if = {
+            limit = { var:mc_state = 0 }
+            remove_variable = mc_sandbox
+        }
+    }
+}
+
+mc_demo_1_10_start = {
+    mc_initialize = yes
+    if = {
+        limit = { mc_contract_idle = yes }
+        if = {
+            limit = { NOT = { has_variable = mc_demo_account } }
+            set_variable = { name = mc_demo_account value = yes }
+            set_variable = { name = mc_sandbox_balance value = 1000000 }
+        }
+        set_variable = { name = mc_level value = 1 }
+        set_variable = { name = mc_size value = 10 }
+        set_variable = { name = mc_sandbox value = yes }
+        mc_sign_contract = yes
+        if = {
+            limit = { var:mc_state = 0 }
+            remove_variable = mc_sandbox
+        }
+    }
+}
+
+mc_demo_2_5_start = {
+    mc_initialize = yes
+    if = {
+        limit = { mc_contract_idle = yes }
+        if = {
+            limit = { NOT = { has_variable = mc_demo_account } }
+            set_variable = { name = mc_demo_account value = yes }
+            set_variable = { name = mc_sandbox_balance value = 1000000 }
+        }
+        set_variable = { name = mc_level value = 2 }
+        set_variable = { name = mc_size value = 5 }
+        set_variable = { name = mc_sandbox value = yes }
+        mc_sign_contract = yes
+        if = {
+            limit = { var:mc_state = 0 }
+            remove_variable = mc_sandbox
+        }
+    }
+}
+
+mc_demo_2_10_start = {
+    mc_initialize = yes
+    if = {
+        limit = { mc_contract_idle = yes }
+        if = {
+            limit = { NOT = { has_variable = mc_demo_account } }
+            set_variable = { name = mc_demo_account value = yes }
+            set_variable = { name = mc_sandbox_balance value = 1000000 }
+        }
+        set_variable = { name = mc_level value = 2 }
+        set_variable = { name = mc_size value = 10 }
+        set_variable = { name = mc_sandbox value = yes }
+        mc_sign_contract = yes
+        if = {
+            limit = { var:mc_state = 0 }
+            remove_variable = mc_sandbox
+        }
+    }
+}
+
+mc_demo_3_5_start = {
+    mc_initialize = yes
+    if = {
+        limit = { mc_contract_idle = yes }
+        if = {
+            limit = { NOT = { has_variable = mc_demo_account } }
+            set_variable = { name = mc_demo_account value = yes }
+            set_variable = { name = mc_sandbox_balance value = 1000000 }
+        }
+        set_variable = { name = mc_level value = 3 }
+        set_variable = { name = mc_size value = 5 }
+        set_variable = { name = mc_sandbox value = yes }
+        mc_sign_contract = yes
+        if = {
+            limit = { var:mc_state = 0 }
+            remove_variable = mc_sandbox
+        }
+    }
+}
+
+mc_demo_3_10_start = {
+    mc_initialize = yes
+    if = {
+        limit = { mc_contract_idle = yes }
+        if = {
+            limit = { NOT = { has_variable = mc_demo_account } }
+            set_variable = { name = mc_demo_account value = yes }
+            set_variable = { name = mc_sandbox_balance value = 1000000 }
+        }
+        set_variable = { name = mc_level value = 3 }
+        set_variable = { name = mc_size value = 10 }
+        set_variable = { name = mc_sandbox value = yes }
+        mc_sign_contract = yes
+        if = {
+            limit = { var:mc_state = 0 }
+            remove_variable = mc_sandbox
+        }
+    }
+}
